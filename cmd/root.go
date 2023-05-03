@@ -10,7 +10,7 @@ var rootCmd = &cobra.Command{
 	Use:   "lbx",
 	Short: "Command Line for LaunchboxHQ",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("Launchbox is initialized!")
+		fmt.Println("Launchbox is initialized, now with pre-commits!")
 	},
 }
 
