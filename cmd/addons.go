@@ -21,4 +21,6 @@ func init() {
 	addonsCmd.AddCommand(addonsListCmd)
 	addonsCmd.AddCommand(addonsCreateCmd)
 	addonsCmd.AddCommand(addonsGetCmd)
+	addonsCmd.AddCommand(addonsUpdateCmd)
+	addonsCmd.AddCommand(addonsDeleteCmd)
 }
