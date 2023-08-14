@@ -58,3 +58,10 @@ func (c *Client) CreateProject(input *CreateProjectInput) (*Project, error) {
 	fmt.Println(string(bytes))
 	return project, err
 }
+
+func (c *Client) DeleteProject(projectId string) error {
+	_, err := c.Handler.
+		Delete("projects/" + projectId).
+		ReceiveSuccess(nil)
+	return err
+}
