@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/launchboxio/launchboxctl/internal/reporter"
 	"github.com/launchboxio/launchboxctl/pkg/client"
 	"github.com/spf13/cobra"
 	"log"
@@ -16,6 +17,7 @@ var (
 				Host:  host,
 				Token: token,
 			})
+			printer = reporter.NewJsonReporter()
 		},
 	}
 
@@ -23,6 +25,7 @@ var (
 	clientId string
 	token    string
 	sdk      *client.Client
+	printer  reporter.JsonReporter
 )
 
 func init() {

@@ -1,8 +1,6 @@
 package main
 
 import (
-	"encoding/json"
-	"fmt"
 	"github.com/spf13/cobra"
 )
 
@@ -15,12 +13,7 @@ var projectsListCmd = &cobra.Command{
 			return err
 		}
 
-		out, err := json.MarshalIndent(projects, "", "  ")
-		if err != nil {
-			return err
-		}
-		fmt.Println(string(out))
-		return nil
+		return printer.Output(projects)
 	},
 }
 

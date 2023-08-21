@@ -1,8 +1,6 @@
 package main
 
 import (
-	"encoding/json"
-	"fmt"
 	"github.com/launchboxio/launchboxctl/pkg/client"
 	"github.com/spf13/cobra"
 )
@@ -34,9 +32,7 @@ var projectsCreateCmd = &cobra.Command{
 			return err
 		}
 
-		out, _ := json.MarshalIndent(project, "", "  ")
-		fmt.Println(string(out))
-		return nil
+		return printer.Output(project)
 	},
 }
 

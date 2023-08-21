@@ -3,6 +3,7 @@ package client
 import (
 	"crypto/tls"
 	"github.com/dghubble/sling"
+	"net/http"
 	"time"
 )
 
@@ -27,7 +28,23 @@ func New(opts *ClientOpts) *Client {
 		New().
 		Base(opts.Host+"/api/"+opts.ApiVersion+"/").
 		Set("Authorization", "Bearer "+opts.Token)
+
 	return &Client{sdk}
+}
+
+func (c *Client) isApiError(resp *http.Response) error {
+	switch resp.StatusCode {
+	case 401:
+		return NewUnauthorizedError()
+	case 403:
+		return NewForbiddenError()
+	case 404:
+		return NewNotFoundError()
+	case 500:
+		return NewInternalServerError()
+	default:
+		return nil
+	}
 }
 
 type Timestamps struct {
