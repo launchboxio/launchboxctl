@@ -17,10 +17,4 @@ var addonsCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(addonsCmd)
-
-	addonsCmd.AddCommand(addonsListCmd)
-	addonsCmd.AddCommand(addonsCreateCmd)
-	addonsCmd.AddCommand(addonsGetCmd)
-	addonsCmd.AddCommand(addonsUpdateCmd)
-	addonsCmd.AddCommand(addonsDeleteCmd)
 }

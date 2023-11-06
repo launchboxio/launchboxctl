@@ -1,8 +1,8 @@
 package cmd
 
 import (
-	"errors"
-	"fmt"
+	"github.com/launchboxio/launchbox-go-sdk/service/addon"
+	"github.com/launchboxio/launchboxctl/internal/printer"
 	"github.com/spf13/cobra"
 	"log"
 )
@@ -10,20 +10,22 @@ import (
 var addonsGetCmd = &cobra.Command{
 	Use:   "get",
 	Short: "View an addon",
-	PreRunE: func(cmd *cobra.Command, args []string) error {
-		if len(args) == 0 {
-			return errors.New("Please pass the ID as the first argument")
-		}
-		return nil
-	},
 	Run: func(cmd *cobra.Command, args []string) {
-		addon := &Addon{}
-		id := args[0]
-		_, err := client.Get(fmt.Sprintf("addons/%s", id)).ReceiveSuccess(addon)
+		addonId, _ := cmd.Flags().GetInt("addon-id")
+
+		addonSdk := addon.New(conf)
+		out, err := addonSdk.Get(&addon.GetAddonInput{
+			AddonId: addonId,
+		})
 		if err != nil {
 			log.Fatal(err)
 		}
 
-		_ = outputJson(addon)
+		printer.Print(out)
 	},
+}
+
+func init() {
+	addonsGetCmd.Flags().Int("addon-id", 0, "ID of the Addon")
+	addonsCmd.AddCommand(addonsGetCmd)
 }

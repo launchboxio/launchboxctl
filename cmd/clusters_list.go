@@ -1,6 +1,8 @@
 package cmd
 
 import (
+	"github.com/launchboxio/launchbox-go-sdk/service/cluster"
+	"github.com/launchboxio/launchboxctl/internal/printer"
 	"github.com/spf13/cobra"
 	"log"
 )
@@ -9,11 +11,16 @@ var clustersListCmd = &cobra.Command{
 	Use:   "list",
 	Short: "List clusters",
 	Run: func(cmd *cobra.Command, args []string) {
-		clusters := new([]Cluster)
-		_, err := client.Get("clusters").ReceiveSuccess(clusters)
+		clusterSdk := cluster.New(conf)
+		clusters, err := clusterSdk.List(&cluster.ListClusterInput{})
 		if err != nil {
 			log.Fatal(err)
 		}
-		_ = outputJson(clusters)
+
+		printer.Print(clusters)
 	},
+}
+
+func init() {
+	clustersCmd.AddCommand(clustersListCmd)
 }

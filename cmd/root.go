@@ -4,28 +4,40 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/dghubble/sling"
+	"github.com/launchboxio/launchbox-go-sdk/config"
 	"github.com/spf13/cobra"
 	"os"
 )
 
 var (
-	client *sling.Sling
+	conf *config.Config
 
-	logo = `
- ___       ________  ___  ___  ________   ________  ___  ___  ________  ________     ___    ___ 
+	client *sling.Sling
+	logo   = `
+ ___       ________  ___  ___  ________   ________  ___  ___  ________  ________     ___    ___
 |\  \     |\   __  \|\  \|\  \|\   ___  \|\   ____\|\  \|\  \|\   __  \|\   __  \   |\  \  /  /|
 \ \  \    \ \  \|\  \ \  \\\  \ \  \\ \  \ \  \___|\ \  \\\  \ \  \|\ /\ \  \|\  \  \ \  \/  / /
- \ \  \    \ \   __  \ \  \\\  \ \  \\ \  \ \  \    \ \   __  \ \   __  \ \  \\\  \  \ \    / / 
-  \ \  \____\ \  \ \  \ \  \\\  \ \  \\ \  \ \  \____\ \  \ \  \ \  \|\  \ \  \\\  \  /     \/  
-   \ \_______\ \__\ \__\ \_______\ \__\\ \__\ \_______\ \__\ \__\ \_______\ \_______\/  /\   \  
-    \|_______|\|__|\|__|\|_______|\|__| \|__|\|_______|\|__|\|__|\|_______|\|_______/__/ /\ __\ 
-                                                                                    |__|/ \|__| 
+ \ \  \    \ \   __  \ \  \\\  \ \  \\ \  \ \  \    \ \   __  \ \   __  \ \  \\\  \  \ \    / /
+  \ \  \____\ \  \ \  \ \  \\\  \ \  \\ \  \ \  \____\ \  \ \  \ \  \|\  \ \  \\\  \  /     \/
+   \ \_______\ \__\ \__\ \_______\ \__\\ \__\ \_______\ \__\ \__\ \_______\ \_______\/  /\   \
+    \|_______|\|__|\|__|\|_______|\|__| \|__|\|_______|\|__|\|__|\|_______|\|_______/__/ /\ __\
+                                                                                    |__|/ \|__|
 `
 )
 
 var rootCmd = &cobra.Command{
 	Use:   "lbx",
 	Short: "Command Line for LaunchboxHQ",
+	PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
+		endpoint, _ := cmd.PersistentFlags().GetString("endpoint")
+		var err error
+		if endpoint == "" {
+			conf, err = config.Default()
+		} else {
+			conf, err = config.DefaultWithEndpoint(endpoint)
+		}
+		return err
+	},
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println(logo)
 
@@ -34,15 +46,7 @@ var rootCmd = &cobra.Command{
 }
 
 func init() {
-	accessToken := os.Getenv("LBX_ACCESS_TOKEN")
-	host := os.Getenv("LBX_ADDRESS")
-	if host == "" {
-		host = "https://api.launchboxhq.io"
-	}
-	client = sling.
-		New().
-		Base(fmt.Sprintf("%s/v1/", host)).
-		Set("Authorization", fmt.Sprintf("Bearer %s", accessToken))
+	rootCmd.PersistentFlags().String("endpoint", "", "API Endpoint for LaunchboxHQ")
 }
 
 func Execute() {

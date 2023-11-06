@@ -13,6 +13,4 @@ var clustersCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(clustersCmd)
-
-	clustersCmd.AddCommand(clustersListCmd)
 }

@@ -1,8 +1,8 @@
 package cmd
 
 import (
-	"errors"
-	"fmt"
+	"github.com/launchboxio/launchbox-go-sdk/service/addon"
+	"github.com/launchboxio/launchboxctl/internal/printer"
 	"github.com/spf13/cobra"
 	"log"
 )
@@ -10,49 +10,37 @@ import (
 var addonsUpdateCmd = &cobra.Command{
 	Use:   "update",
 	Short: "Update an addon",
-	PreRunE: func(cmd *cobra.Command, args []string) error {
-		if len(args) == 0 {
-			return errors.New("Please pass the ID as the first argument")
-		}
-		return nil
-	},
 	Run: func(cmd *cobra.Command, args []string) {
-		id := args[0]
-
-		addon := &Addon{}
-
-		name, _ := cmd.Flags().GetString("name")
+		addonId, _ := cmd.Flags().GetInt("addon-id")
 		registry, _ := cmd.Flags().GetString("registry")
 		version, _ := cmd.Flags().GetString("version")
+		pullPolicy, _ := cmd.Flags().GetString("pull-policy")
+		activationPolicy, _ := cmd.Flags().GetString("activation-policy")
 
-		if name != "" {
-			addon.Name = name
+		addonSdk := addon.New(conf)
+		payload := &addon.UpdateAddonInput{
+			AddonId:          addonId,
+			OciRegistry:      registry,
+			OciVersion:       version,
+			PullPolicy:       pullPolicy,
+			ActivationPolicy: activationPolicy,
 		}
-		if registry != "" {
-			addon.OciRegistry = registry
-		}
-		if version != "" {
-			addon.OciVersion = version
-		}
-
-		if addon == (&Addon{}) {
-			fmt.Println("No changes found")
-			return
-		}
-		_, err := client.
-			Put(fmt.Sprintf("addons/%s", id)).
-			BodyJSON(addon).
-			ReceiveSuccess(addon)
+		out, err := addonSdk.Update(payload)
 		if err != nil {
 			log.Fatal(err)
 		}
 
-		_ = outputJson(addon)
+		printer.Print(out)
 	},
 }
 
 func init() {
+	addonsUpdateCmd.Flags().Int("addon-id", 0, "Addon ID")
+	_ = addonsUpdateCmd.MarkFlagRequired("addon-id")
 	addonsUpdateCmd.Flags().String("registry", "", "OCI Url for the artifact")
-	addonsUpdateCmd.Flags().String("version", "", "OCI Version for the artifact")
-	addonsUpdateCmd.Flags().String("name", "", "Name of the addon")
+	addonsUpdateCmd.Flags().String("version", "latest", "OCI version for the artifact")
+	addonsUpdateCmd.Flags().String("pull-policy", "IfNotPresent", "Pull policy for the OCI artifact")
+	addonsUpdateCmd.Flags().String("activation-policy", "Manual", "Crossplane package activation policy")
+
+	addonsCmd.AddCommand(addonsUpdateCmd)
 }

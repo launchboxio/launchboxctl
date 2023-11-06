@@ -1,6 +1,8 @@
 package cmd
 
 import (
+	"github.com/launchboxio/launchbox-go-sdk/service/addon"
+	"github.com/launchboxio/launchboxctl/internal/printer"
 	"github.com/spf13/cobra"
 	"log"
 )
@@ -9,11 +11,11 @@ var addonsListCmd = &cobra.Command{
 	Use:   "list",
 	Short: "List addons",
 	Run: func(cmd *cobra.Command, args []string) {
-		addons := new([]Addon)
-		_, err := client.Get("addons").ReceiveSuccess(addons)
+		addonSdk := addon.New(conf)
+		addons, err := addonSdk.List(&addon.ListAddonInput{})
 		if err != nil {
 			log.Fatal(err)
 		}
-		_ = outputJson(addons)
+		printer.Print(addons)
 	},
 }

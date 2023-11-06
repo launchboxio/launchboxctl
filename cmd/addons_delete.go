@@ -1,8 +1,8 @@
 package cmd
 
 import (
-	"errors"
 	"fmt"
+	"github.com/launchboxio/launchbox-go-sdk/service/addon"
 	"github.com/spf13/cobra"
 	"log"
 )
@@ -10,20 +10,23 @@ import (
 var addonsDeleteCmd = &cobra.Command{
 	Use:   "delete",
 	Short: "Delete an addon",
-	PreRunE: func(cmd *cobra.Command, args []string) error {
-		if len(args) == 0 {
-			return errors.New("Please pass the ID as the first argument")
-		}
-		return nil
-	},
 	Run: func(cmd *cobra.Command, args []string) {
-		id := args[0]
-		_, err := client.
-			Delete(fmt.Sprintf("addons/%s", id)).
-			ReceiveSuccess(nil)
+		addonId, _ := cmd.Flags().GetInt("addon-id")
+
+		addonSdk := addon.New(conf)
+		_, err := addonSdk.Delete(&addon.DeleteAddonInput{
+			AddonId: addonId,
+		})
 		if err != nil {
-			log.Fatal(err)
+			log.Fatal(nil)
 		}
 		fmt.Println("Addon deleted")
 	},
+}
+
+func init() {
+	addonsDeleteCmd.Flags().Int("addon-id", 0, "Addon ID")
+	_ = addonsDeleteCmd.MarkFlagRequired("addon-id")
+
+	addonsCmd.AddCommand(addonsDeleteCmd)
 }
