@@ -1,9 +1,7 @@
 package cmd
 
 import (
-	"encoding/json"
 	"fmt"
-	"github.com/dghubble/sling"
 	"github.com/launchboxio/launchbox-go-sdk/config"
 	"github.com/spf13/cobra"
 	"os"
@@ -12,8 +10,7 @@ import (
 var (
 	conf *config.Config
 
-	client *sling.Sling
-	logo   = `
+	logo = `
  ___       ________  ___  ___  ________   ________  ___  ___  ________  ________     ___    ___
 |\  \     |\   __  \|\  \|\  \|\   ___  \|\   ____\|\  \|\  \|\   __  \|\   __  \   |\  \  /  /|
 \ \  \    \ \  \|\  \ \  \\\  \ \  \\ \  \ \  \___|\ \  \\\  \ \  \|\ /\ \  \|\  \  \ \  \/  / /
@@ -54,14 +51,4 @@ func Execute() {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
 	}
-}
-
-func outputJson(in interface{}) error {
-	b, err := json.MarshalIndent(in, "", "    ")
-	if err != nil {
-		fmt.Printf("Error: %s", err)
-		return err
-	}
-	fmt.Println(string(b))
-	return nil
 }
