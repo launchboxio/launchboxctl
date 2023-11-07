@@ -1,10 +1,10 @@
-package main
+package cmd
 
 import "github.com/spf13/cobra"
 
 var projectsCmd = &cobra.Command{
-	Use:   "projects",
-	Short: "Manage Launchbox projects",
+	Use:   "clusters",
+	Short: "Interact with clusters",
 }
 
 func init() {
