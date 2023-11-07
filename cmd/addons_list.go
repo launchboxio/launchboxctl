@@ -19,3 +19,7 @@ var addonsListCmd = &cobra.Command{
 		printer.Print(addons)
 	},
 }
+
+func init() {
+	addonsCmd.AddCommand(addonsListCmd)
+}

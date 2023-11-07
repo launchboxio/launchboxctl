@@ -48,4 +48,6 @@ func init() {
 	projectsCreateCmd.Flags().Int("cpu", 2, "CPU cores to assign")
 	projectsCreateCmd.Flags().Int("disk", 50, "Disk size, in GB")
 	projectsCreateCmd.Flags().StringArray("tags", []string{}, "Tags for the project")
+
+	projectsCmd.AddCommand(projectsCreateCmd)
 }
