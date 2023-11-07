@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [1.0.2](https://github.com/launchboxio/launchboxctl/compare/v1.0.1...v1.0.2) (2023-11-07)
+
+
+### Bug Fixes
+
+* **sdk:** Update SDK version, fix command registration ([7838aff](https://github.com/launchboxio/launchboxctl/commit/7838affabe928e439e318d099232bd8c6ca1a44a))
+
 ### [1.0.1](https://github.com/launchboxio/launchboxctl/compare/v1.0.0...v1.0.1) (2023-11-07)
 
 
