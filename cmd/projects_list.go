@@ -20,3 +20,7 @@ var projectsListCmd = &cobra.Command{
 		printer.Print(projects)
 	},
 }
+
+func init() {
+	projectsCmd.AddCommand(projectsListCmd)
+}

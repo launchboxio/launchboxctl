@@ -3,8 +3,8 @@ package cmd
 import "github.com/spf13/cobra"
 
 var projectsCmd = &cobra.Command{
-	Use:   "clusters",
-	Short: "Interact with clusters",
+	Use:   "projects",
+	Short: "Interact with projects",
 }
 
 func init() {
