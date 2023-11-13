@@ -3,7 +3,7 @@ module github.com/launchboxio/launchboxctl
 go 1.21
 
 require (
-	github.com/launchboxio/launchbox-go-sdk v1.1.0
+	github.com/launchboxio/launchbox-go-sdk v1.3.0
 	github.com/spf13/cobra v1.7.0
 )
 
