@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.0](https://github.com/launchboxio/launchboxctl/compare/v1.0.2...v1.1.0) (2023-11-14)
+
+
+### Features
+
+* Add update-kubeconfig command for connecting to project clusters ([8cb6fb8](https://github.com/launchboxio/launchboxctl/commit/8cb6fb87964071ba4a2b79c6fdeac3425eab7d40))
+
+
+### Bug Fixes
+
+* Add tokens for github private modules ([51d3a79](https://github.com/launchboxio/launchboxctl/commit/51d3a795735c19169ae380969427086daca3b39e))
+
 ### [1.0.2](https://github.com/launchboxio/launchboxctl/compare/v1.0.1...v1.0.2) (2023-11-07)
 
 
