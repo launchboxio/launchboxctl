@@ -8,6 +8,10 @@ on:
     branches:
       - main
 
+env:
+  GOPRIVATE: github.com/launchboxio/launchbox-go-sdk
+  GH_ACCESS_TOKEN: ${{ secrets.GO_MODULE_ACCESS_TOKEN }}
+
 jobs:
   lint:
     name: Lint
@@ -17,6 +21,7 @@ jobs:
       - uses: actions/setup-go@v4
         with:
           go-version: '1.21'
+      - run: git config --global url.https://$GH_ACCESS_TOKEN@github.com/.insteadOf https://github.com/
       - run: go get
       - run: |
           formatted_count=$(gofmt -s -l . | wc -l)
@@ -33,6 +38,7 @@ jobs:
       - uses: actions/setup-go@v4
         with:
           go-version: '1.21'
+      - run: git config --global url.https://$GH_ACCESS_TOKEN@github.com/.insteadOf https://github.com/
       - run: go get
       - run: go build -v ./...
       - run: go test -v ./... -cover

@@ -5,6 +5,10 @@ on:
     types:
       - created
 
+env:
+  GOPRIVATE: github.com/launchboxio/launchbox-go-sdk
+  GH_ACCESS_TOKEN: ${{ secrets.GO_MODULE_ACCESS_TOKEN }}
+
 permissions:
   contents: write
 
@@ -18,6 +22,7 @@ jobs:
           fetch-depth: 0
       - name: Set up Go
         uses: actions/setup-go@v4
+      - run: git config --global url.https://$GH_ACCESS_TOKEN@github.com/.insteadOf https://github.com/
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v5
         with:
