@@ -6,7 +6,9 @@ import (
 	"github.com/spf13/cobra"
 	"k8s.io/client-go/tools/clientcmd"
 	clientcmdapi "k8s.io/client-go/tools/clientcmd/api"
+	"k8s.io/client-go/util/homedir"
 	"log"
+	"os"
 )
 
 var updateKubeconfigCmd = &cobra.Command{
@@ -26,6 +28,12 @@ func init() {
 }
 
 func updateKubeconfig(cmd *cobra.Command, args []string) {
+	var configFile string
+	if val, ok := os.LookupEnv("KUBECONFIG"); ok {
+		configFile = val
+	} else {
+		configFile = fmt.Sprintf("%s/.kube/config", homedir.HomeDir())
+	}
 	projectId, _ := cmd.Flags().GetInt("project-id")
 	oidcIssuer, _ := cmd.Flags().GetString("oidc-issuer-url")
 	clientId, _ := cmd.Flags().GetString("client-id")
@@ -40,11 +48,13 @@ func updateKubeconfig(cmd *cobra.Command, args []string) {
 	caCert := result.Project.CaCertificate
 	slug := result.Project.Slug
 
-	currentConfig, err := clientcmd.LoadFromFile("/Users/rwittman/.kube/config")
+	currentConfig, err := clientcmd.LoadFromFile(configFile)
 	if err != nil {
 		log.Fatal(err)
 	}
 
+	// TODO: We need to source this from project.Host
+	// This breaks once multiple clusters are available
 	currentConfig.Clusters[slug] = &clientcmdapi.Cluster{
 		Server:                   fmt.Sprintf("https://api.%s.launchboxhq.io", slug),
 		CertificateAuthorityData: []byte(caCert),
@@ -68,7 +78,7 @@ func updateKubeconfig(cmd *cobra.Command, args []string) {
 		Cluster:  slug,
 	}
 	currentConfig.CurrentContext = slug
-	err = clientcmd.WriteToFile(*currentConfig, "/Users/rwittman/.kube/config")
+	err = clientcmd.WriteToFile(*currentConfig, configFile)
 	if err != nil {
 		log.Fatal(err)
 	}
