@@ -17,6 +17,7 @@ var projectsCreateCmd = &cobra.Command{
 		memory, _ := cmd.Flags().GetInt("memory")
 		cpu, _ := cmd.Flags().GetInt("cpu")
 		disk, _ := cmd.Flags().GetInt("disk")
+		clusterId, _ := cmd.Flags().GetInt("cluster-id")
 
 		//tags, _ := cmd.Flags().GetStringArray("tags")
 
@@ -25,6 +26,10 @@ var projectsCreateCmd = &cobra.Command{
 			Memory: memory,
 			Disk:   disk,
 			Name:   name,
+		}
+
+		if clusterId != 0 {
+			input.ClusterId = clusterId
 		}
 
 		projectSdk := project.New(conf)
@@ -48,6 +53,7 @@ func init() {
 	projectsCreateCmd.Flags().Int("cpu", 2, "CPU cores to assign")
 	projectsCreateCmd.Flags().Int("disk", 50, "Disk size, in GB")
 	projectsCreateCmd.Flags().StringArray("tags", []string{}, "Tags for the project")
+	projectsCreateCmd.Flags().Int("cluster-id", 0, "ID of the cluster to deploy to")
 
 	projectsCmd.AddCommand(projectsCreateCmd)
 }
