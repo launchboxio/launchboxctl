@@ -68,7 +68,6 @@ func updateKubeconfig(cmd *cobra.Command, args []string) {
 		Cluster:  slug,
 	}
 	currentConfig.CurrentContext = slug
-
 	err = clientcmd.WriteToFile(*currentConfig, "/Users/rwittman/.kube/config")
 	if err != nil {
 		log.Fatal(err)

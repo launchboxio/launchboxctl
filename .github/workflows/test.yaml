@@ -8,6 +8,10 @@ on:
     branches:
       - main
 
+env:
+  GOPRIVATE: github.com/launchboxio/launchbox-go-sdk
+  GH_ACCESS_TOKEN: ${{ secrets.GO_MODULE_ACCESS_TOKEN }}
+
 jobs:
   lint:
     name: Lint
