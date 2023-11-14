@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [1.3.1](https://github.com/launchboxio/launchboxctl/compare/v1.3.0...v1.3.1) (2023-11-14)
+
+
+### Bug Fixes
+
+* Adjust update-kubeconfig to dynamically set config ([cf6e233](https://github.com/launchboxio/launchboxctl/commit/cf6e23393e594c4a8f3a8b67a6dc8c1899ccee64))
+
 ## [1.3.0](https://github.com/launchboxio/launchboxctl/compare/v1.2.0...v1.3.0) (2023-11-14)
 
 
