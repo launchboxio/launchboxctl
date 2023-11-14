@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.0](https://github.com/launchboxio/launchboxctl/compare/v1.1.0...v1.2.0) (2023-11-14)
+
+
+### Features
+
+* Support addon management ([480e4ce](https://github.com/launchboxio/launchboxctl/commit/480e4ce86a345a9d198391f00da546f22130a7ca))
+
 ## [1.1.0](https://github.com/launchboxio/launchboxctl/compare/v1.0.2...v1.1.0) (2023-11-14)
 
 
