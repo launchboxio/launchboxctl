@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.0](https://github.com/launchboxio/launchboxctl/compare/v1.2.0...v1.3.0) (2023-11-14)
+
+
+### Features
+
+* Allow setting ClusterID when creating a project ([f21896b](https://github.com/launchboxio/launchboxctl/commit/f21896bb151ede31f6dd419feeb495770b217125))
+
 ## [1.2.0](https://github.com/launchboxio/launchboxctl/compare/v1.1.0...v1.2.0) (2023-11-14)
 
 
