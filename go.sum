@@ -45,6 +45,12 @@ github.com/launchboxio/launchbox-go-sdk v1.3.0 h1:CLgYXbys/rPexp8MaOAkPhuT+KLU8o
 github.com/launchboxio/launchbox-go-sdk v1.3.0/go.mod h1:rIzxS0g5mb7UX9z9fm4gHtXwUtP4flbbySJkeu8rVlw=
 github.com/launchboxio/launchbox-go-sdk v1.3.3 h1:UIrtcT4LJgWMs7IO6sVKcnHiB8lkfYXHPM0PavMmUn0=
 github.com/launchboxio/launchbox-go-sdk v1.3.3/go.mod h1:rIzxS0g5mb7UX9z9fm4gHtXwUtP4flbbySJkeu8rVlw=
+github.com/launchboxio/launchbox-go-sdk v1.3.4 h1:6hlFguEG2UiJpA57iHOSPRNAg43yuyemDT7H1dfrBcM=
+github.com/launchboxio/launchbox-go-sdk v1.3.4/go.mod h1:rIzxS0g5mb7UX9z9fm4gHtXwUtP4flbbySJkeu8rVlw=
+github.com/launchboxio/launchbox-go-sdk v1.3.5 h1:4phqZSb68ol9LHUdV0XSV8YtP5YPXG0aZzc6vgZwbkc=
+github.com/launchboxio/launchbox-go-sdk v1.3.5/go.mod h1:rIzxS0g5mb7UX9z9fm4gHtXwUtP4flbbySJkeu8rVlw=
+github.com/launchboxio/launchbox-go-sdk v1.3.6 h1:zsCT2jlBSJoXeB9jx4/BcYA7M5LorPsSKitnhISn2Ck=
+github.com/launchboxio/launchbox-go-sdk v1.3.6/go.mod h1:rIzxS0g5mb7UX9z9fm4gHtXwUtP4flbbySJkeu8rVlw=
 github.com/mailru/easyjson v0.7.7 h1:UGYAvKxe3sBsEDzO8ZeWOSlIQfWFlxbzLZe7hwFURr0=
 github.com/mailru/easyjson v0.7.7/go.mod h1:xzfreul335JAWq5oZzymOObrkdz5UnU4kGfJJLY9Nlc=
 github.com/modern-go/concurrent v0.0.0-20180228061459-e0a39a4cb421/go.mod h1:6dJC0mAP4ikYIbvyc7fijjWJddQyLn8Ig3JB5CqoB9Q=

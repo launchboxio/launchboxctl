@@ -18,14 +18,16 @@ var projectsCreateCmd = &cobra.Command{
 		cpu, _ := cmd.Flags().GetInt("cpu")
 		disk, _ := cmd.Flags().GetInt("disk")
 		clusterId, _ := cmd.Flags().GetInt("cluster-id")
-
-		//tags, _ := cmd.Flags().GetStringArray("tags")
+		version, _ := cmd.Flags().GetString("version")
 
 		input := &project.CreateProjectInput{
 			Cpu:    cpu,
 			Memory: memory,
 			Disk:   disk,
 			Name:   name,
+		}
+		if version != "" {
+			input.KubernetesVersion = version
 		}
 
 		if clusterId != 0 {
@@ -44,9 +46,6 @@ var projectsCreateCmd = &cobra.Command{
 func init() {
 	projectsCreateCmd.Flags().String("name", "", "Project name")
 	_ = projectsCreateCmd.MarkFlagRequired("name")
-	//
-	//projectsCreateCmd.Flags().Int("cluster", 0, "ID of the cluster to attach the project to")
-	//_ = projectsCreateCmd.MarkFlagRequired("cluster")
 
 	projectsCreateCmd.Flags().Bool("wait", false, "Wait for project creation to finish")
 	projectsCreateCmd.Flags().Int("memory", 4096, "Memory for the project (GB)")
@@ -54,6 +53,7 @@ func init() {
 	projectsCreateCmd.Flags().Int("disk", 50, "Disk size, in GB")
 	projectsCreateCmd.Flags().StringArray("tags", []string{}, "Tags for the project")
 	projectsCreateCmd.Flags().Int("cluster-id", 0, "ID of the cluster to deploy to")
+	projectsCreateCmd.Flags().String("version", "", "Kubernetes version to use")
 
 	projectsCmd.AddCommand(projectsCreateCmd)
 }
