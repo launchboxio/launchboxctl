@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.0](https://github.com/launchboxio/launchboxctl/compare/v1.3.1...v1.4.0) (2023-11-15)
+
+
+### Features
+
+* Add clusters.update and clusters.create, add kubernetes version to projects.create ([f9f57f9](https://github.com/launchboxio/launchboxctl/commit/f9f57f9cc499d4c8ed1f5596393bbcd05d16c81e))
+
 ### [1.3.1](https://github.com/launchboxio/launchboxctl/compare/v1.3.0...v1.3.1) (2023-11-14)
 
 
